@@ -1,0 +1,81 @@
+/* MAIN SETTINGS */
+
+html {
+    box-sizing: border-box;
+}
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* START SCREEN */
+
+#splash {
+    background-image: url("../img/cityscape.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+#title {
+   position: relative;
+   top: 200px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.arcade-button {
+    position: relative;
+    top: 230px;
+    left: 570px;
+    width: 300px;
+    height: 100px;
+    background-color: lightgrey;
+}
+
+.arcade-button img {
+    width: 250px;
+}
+
+
+/* GAME SCREEN */
+
+header {
+    background-color: lightseagreen;
+    height: 100px;
+}
+
+#life-container {
+    box-sizing: content-box;
+    background-color: magenta;
+    height: 80px;
+    border: 2px solid black
+}
+
+
+/* END SCREEN */
+
+#end {
+    background-image: url("../img/cityscape.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+h1,
+h2,
+ol {
+    position: relative;
+    text-align: center;
+    color: white;
+}

@@ -91,6 +91,8 @@ Contains the main Game class, which will serve as the blueprint for the game obj
 
 `enemies`
 
+`buildings`
+
 `gameIsOver`
 
 `gameScreen`

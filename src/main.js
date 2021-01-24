@@ -1,3 +1,6 @@
+"use strict";
+
+let game;
 let splashScreen;
 let gameScreen;
 let gameOverScreen;
@@ -11,7 +14,6 @@ function buildDom (html) {
 
 // SCREEN GENERATORS
 // Update inner HTML !!!
-// Update button event !!!
 function createSplashScreen () {
     splashScreen = buildDom(`
     <main id="splash">
@@ -23,9 +25,8 @@ function createSplashScreen () {
     document.body.appendChild(splashScreen);
 
     const startButton = document.querySelector('.arcade-button');
-    startButton.addEventListener('click', function () {
-        console.log("Start the game!");
-    });    
+    startButton.addEventListener('click', startGame);
+       
 }
 
 // Update inner HMTL !!!
@@ -33,10 +34,10 @@ function createGameScreen () {
     gameScreen = buildDom (`
     <header>
         <section id="life-container">
-            <img>
-            <div></div>
-            <div></div>
-            <div></div>
+            <img>>
+            <div id="critical" class="life-bar"></div>
+            <div id="wounded" class="life-bar"></div>
+            <div id="healthy" class="life-bar"></div>
         </section>
         <section id="score">
             <img>
@@ -50,18 +51,19 @@ function createGameScreen () {
 }
 
 // Update inner HTML !!!
-// Update button event !!!
 function createGameOverScreen () {
     gameOverScreen = buildDom(`
     <main id="end">
         <h1>GAME OVER</h1>
         <h2>HIGH SCORE</h2>        
         <ol>
-            <li>TBA</li>
-            <li>TBA</li>
-            <li>TBA</li>
-            <li>TBA</li>
-            <li>TBA</li>
+            <li>COVID-19</li>
+            <li>Ebola</li>
+            <li>Malaria</li>
+            <li>Dengue</li>
+            <li>HIV</li>
+            <li>Rabies</li>
+            <li>Influenza</li>
         </ol>
         <button class="arcade-button">
             <img src="img/replay.png">
@@ -71,23 +73,39 @@ function createGameOverScreen () {
 
     const replayButton = document.querySelector('.arcade-button');
     replayButton.addEventListener('click', function () {
-        console.log("Play again!");
+        removeGameOverScreen();
+        //Pending game stats removal !!!
+        createGameScreen();
     })
 }
 
 
 // PENDING
 function removeSplashScreen () {
+    splashScreen.remove();
 }
 
 function removeGameScreen () {
+    gameScreen.remove();
 }
 
 function removeGameOverScreen () {
+    gameOverScreen.remove();
 }
 
 function startGame () {
+    removeSplashScreen();
+    createGameScreen();
+
+    game = new Game();
+    game.gameScreen = gameScreen;
+
+    game.start();
 }
 
 function endGame () {
+    removeGameScreen();
+    createGameOverScreen();
 }
+
+window.addEventListener('load', createSplashScreen);

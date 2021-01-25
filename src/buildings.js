@@ -8,9 +8,9 @@ class Building {
         this.outerX = outerX;
         this.outerY = outerY;
         this.catchScore = catchScore;
-        this.innerX = this.outerX + this.size / 2;
-        this.innerY = this.outerY + this.size / 2;
+        this.core = [Math.floor((this.outerX + this.size) / 2), Math.floor((this.outerY + this.size) / 2)];
         this.isInfected = false;
+        this.outOfGame = false;
     }
 
     draw () {
@@ -30,9 +30,14 @@ class Building {
     }
 
     updatePosition () {
-        this.outerY += 1;
+        this.outerY += 2;
+        this.core[1] += 2;
     }
 
-    isInsideScreen () {
+    isInsideScreen () { // UNDER CONSTRUCTION
+        if (this.outerY > game.containerHeight) {
+            this.outOfGame = true;
+            return this.outOfGame;
+        }
     }
 }

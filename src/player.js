@@ -13,7 +13,7 @@ class Player {
     }
 
     /* setDirection (direction) {
-    } */
+    } */  // NOT NEEDED!!!
 
     handleScreenCollision () {
         if (this.x <= 0 && this.direction === -1) {
@@ -43,6 +43,39 @@ class Player {
         this.ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 
-    didCollide (obstacle) {
-    } 
+    didCollide (buildingCore, buildingType) {  // UNDER CONSTRUCTION (Logic not working!)
+        let playerUpperSide = [];
+        let playerLowerSide = [];
+        let playerLeftSide = [];
+        let playerRightSide = [];
+        
+        for (let i = this.x; i < this.x + this.size; i++) {
+            playerUpperSide.push([i, this.y]);
+            if ([i, this.y] === buildingCore) {
+                console.log('hit!')
+                return true;
+            }
+        }
+        for (let i = this.x; i < this.x + this.size; i++) {
+            playerLowerSide.push([i, this.y + this.size]);
+            if ([i, this.y + this.size] === buildingCore) {
+                console.log('hit!')
+                return true;
+            }
+        }
+        for (let i = this.y; i < this.y + this.size; i++) {
+            playerLeftSide.push([this.x, i]);
+            if ([this.x, i] === buildingCore) {
+                console.log('hit!')
+                return true;
+            }
+        }
+        for (let i = this.y; i < this.y + this.size; i++) {
+            playerRightSide.push([this.x + this.size, i]);
+            if ([this.x + this.size, i] === buildingCore) {
+                console.log('hit!')
+                return true;
+            }
+        }
+    }
 }

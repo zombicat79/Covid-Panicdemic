@@ -17,23 +17,21 @@ class Player {
 
     handleScreenCollision () {
         if (this.x <= 0 && this.direction === -1) {
-            this.speed = 0;
-            return true;
+            this.x = 1;
         }
         else if (this.y <= 0 && this.direction === -1) {
-            this.speed = 0;
-            return true;
+            this.y = 1;            
         }
-        else if (this.x = game.containerWidth - this.size && this.direction === 1) {
-            this.speed = 0;
-            return true;
+        else if (this.x >= game.containerWidth - this.size && this.direction === 1) {
+            this.x = game.containerWidth - this.size - 1;
+            
         }
-        else if (this.y >= game.containerHeight + this.size && this.direction === 1) {
-            this.speed = 0;
-            return true;
+        else if (this.y >= game.containerHeight - 120 && this.direction === 1) {
+            this.y = game.containerHeight - 141;    
         }
         else {
-            this.speed = 30;
+            this.x = this.x;
+            this.y = this.y;
         }
     }
 

@@ -26,7 +26,8 @@ class Game {
         this.player = new Player(this.canvas, 3, 40, middleScreen, bottomScreen);
         this.player.draw();
         
-        document.body.addEventListener('keydown', this.handleKeyInput);
+        const boundHandleKeyInput = this.handleKeyInput.bind(this)
+        document.body.addEventListener('keydown', boundHandleKeyInput);
 
         this.startLoop();
         
@@ -35,47 +36,49 @@ class Game {
     handleKeyInput(event) {
         // Using "which" property of the event to manage keyboard input
         switch(event.which) {
-            case 87:
-                game.player.direction = -1;
-                game.player.y = game.player.y + (game.player.direction * game.player.speed);
-                break;
-            case 83:
-                game.player.direction = 1;
-                game.player.y = game.player.y + (game.player.direction * game.player.speed);
-                break;
-            case 65:
-                game.player.direction = -1;
-                game.player.x = game.player.x + (game.player.direction * game.player.speed);
-                break;
-            case 68:
-                game.player.direction = 1;
-                game.player.x = game.player.x + (game.player.direction * game.player.speed);
-                break;
+            case 87: //up
             case 38:
-                this.player.direction = -1;
-                console.log('up!');
+                game.player.direction = -1;
+                game.player.y = game.player.y + (game.player.direction * game.player.speed);
                 break;
+            case 83: //down
             case 40:
-                this.player.direction = 1;
-                console.log('down!');
+                game.player.direction = 1;
+                game.player.y = game.player.y + (game.player.direction * game.player.speed);
                 break;
+            case 65: //left
             case 37:
-                this.player.direction = -1;
-                console.log('left!');
+                game.player.direction = -1;
+                game.player.x = game.player.x + (game.player.direction * game.player.speed);
                 break;
+            case 68: //right
             case 39:
-                this.player.direction = 1;
-                console.log('right!');
+                game.player.direction = 1;
+                game.player.x = game.player.x + (game.player.direction * game.player.speed);
                 break;
             }
     } 
 
     startLoop () {
         const loop = function () {
-            // game.player.handleScreenCollision();
+            if (Math.random() > 0.995) {
+                let newBuilding = new Building(this.canvas, "hospital", 100, Math.random() * 1300, -50);
+                let lastBuilding = game.buildings.length - 1;
+                console.log(lastBuilding.outerY);
+                if (lastBuilding.outerY === undefined || newBuilding.outerY + newBuilding.size < lastBuilding.outerY) {
+                    game.buildings.push(newBuilding);
+                }
+            }
+            game.player.handleScreenCollision();
+            game.buildings.forEach(function(element) {
+                element.updatePosition();
+            })
             game.ctx.fillStyle = "white";
             game.ctx.fillRect(0, 0, game.containerWidth, game.containerHeight);
             game.player.draw();
+            game.buildings.forEach(function(element) {
+                element.draw();
+            })
             if (this.gameIsOver === false) {
                 window.requestAnimationFrame(loop);
             }

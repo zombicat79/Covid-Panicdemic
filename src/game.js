@@ -61,12 +61,34 @@ class Game {
 
     startLoop () {
         const loop = function () {
-            if (Math.random() > 0.995) {
-                let newBuilding = new Building(this.canvas, "hospital", 100, Math.random() * 1300, -50);
-                let lastBuilding = game.buildings.length - 1;
-                console.log(lastBuilding.outerY);
-                if (lastBuilding.outerY === undefined || newBuilding.outerY + newBuilding.size < lastBuilding.outerY) {
-                    game.buildings.push(newBuilding);
+            let randomNumber = Math.random();
+            let lastBuilding = game.buildings.length - 1;
+            if (randomNumber > 0.98 && randomNumber < 0.99) {
+                let newHospitalBuilding = new Building(this.canvas, "hospital", "green", 100, Math.random() * 1300, -50, 5000);
+                console.log(newHospitalBuilding);
+                if (lastBuilding < 0 || newHospitalBuilding.outerY + newHospitalBuilding.size + 5 < game.buildings[lastBuilding].outerY) {
+                    game.buildings.push(newHospitalBuilding);
+                }
+            }
+            if (randomNumber > 0.965 && randomNumber < 0.98) {
+                let newSchoolBuilding = new Building(this.canvas, "school", "brown", 80, Math.random() * 1300, -50, 2000);
+                console.log(newSchoolBuilding);
+                if (lastBuilding < 0 || newSchoolBuilding.outerY + newSchoolBuilding.size + 5 < game.buildings[lastBuilding].outerY) {
+                    game.buildings.push(newSchoolBuilding);
+                }
+            }
+            if (randomNumber > 0.935 && randomNumber < 0.965) {
+                let newMallBuilding = new Building(this.canvas, "mall", "yellow", 120, Math.random() * 1300, -50, 1000);
+                console.log(newMallBuilding);
+                if (lastBuilding < 0 || newMallBuilding.outerY + newMallBuilding.size + 5 < game.buildings[lastBuilding].outerY) {
+                    game.buildings.push(newMallBuilding);
+                }
+            }
+            if (randomNumber > 0.9 && randomNumber < 0.935) {
+                let newApartmentBuilding = new Building(this.canvas, "apartment", "blue", 60, Math.random() * 1300, -50, 500);
+                console.log(newApartmentBuilding);
+                if (lastBuilding < 0 || newApartmentBuilding.outerY + newApartmentBuilding.size + 5 < game.buildings[lastBuilding].outerY) {
+                    game.buildings.push(newApartmentBuilding);
                 }
             }
             game.player.handleScreenCollision();

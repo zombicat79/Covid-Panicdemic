@@ -1,3 +1,5 @@
+"use strict"
+
 class Enemy {
     constructor (canvas, size, x, y) {
         this.canvas = canvas;

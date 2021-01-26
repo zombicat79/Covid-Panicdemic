@@ -1,3 +1,5 @@
+"use strict"
+
 class Building {
     constructor (canvas, name, color, size, outerX, outerY, catchScore) {
         this.canvas = canvas;

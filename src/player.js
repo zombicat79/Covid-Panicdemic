@@ -43,38 +43,39 @@ class Player {
         this.ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 
-    didCollide (buildingCore, buildingType) {  // UNDER CONSTRUCTION (Logic not working!)
-        let playerUpperSide = [];
-        let playerLowerSide = [];
-        let playerLeftSide = [];
-        let playerRightSide = [];
+    didCollideBuildings (buildingX, buildingY, buildingSize, buildingType) {  
+        let crossedTop = false;
+        let crossedBottom = false;
+        let crossedLeft = false;
+        let crossedRight = false;
         
-        for (let i = this.x; i < this.x + this.size; i++) {
-            playerUpperSide.push([i, this.y]);
-            if ([i, this.y] === buildingCore) {
-                console.log('hit!')
-                return true;
-            }
+        
+        if (buildingY + buildingSize >= this.y) {
+            crossedTop = true;
         }
-        for (let i = this.x; i < this.x + this.size; i++) {
-            playerLowerSide.push([i, this.y + this.size]);
-            if ([i, this.y + this.size] === buildingCore) {
-                console.log('hit!')
-                return true;
-            }
+        if (buildingY <= this.y + this.size) {
+            crossedBottom = true;
         }
-        for (let i = this.y; i < this.y + this.size; i++) {
-            playerLeftSide.push([this.x, i]);
-            if ([this.x, i] === buildingCore) {
-                console.log('hit!')
-                return true;
-            }
+        if (buildingX + buildingSize >= this.x) {
+            crossedRight = true;
         }
-        for (let i = this.y; i < this.y + this.size; i++) {
-            playerRightSide.push([this.x + this.size, i]);
-            if ([this.x + this.size, i] === buildingCore) {
-                console.log('hit!')
-                return true;
+        if (buildingX <= this.x + this.size) {
+            crossedLeft = true;
+        }
+        if (crossedTop && crossedBottom && crossedLeft && crossedRight) {
+            console.log("hit!");
+            switch (buildingType) {
+                case "hospital":
+                    game.score += 5000;
+                    break;
+                case "school":
+                    game.score += 2000;
+                    break;
+                case "mall":
+                    game.score += 1000;
+                    break;
+                default:
+                    game.score += 500;
             }
         }
     }

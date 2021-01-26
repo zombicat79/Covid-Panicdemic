@@ -63,7 +63,6 @@ class Game {
 
     startLoop () {
         const loop = function () {
-
             // Random creation of sanitizers (enemies)
             if (Math.random () > 0.99) {
                 let sanitizer = new Enemy(this.canvas, 40, Math.random() * 1300, -100);
@@ -114,9 +113,11 @@ class Game {
             
             //Check for collisions with buildings
             game.buildings.forEach(function(element) {
-                let buildingCore = element.core;
+                let buildingX = element.outerX;
+                let buildingY = element.outerY;
+                let buildingSize = element.size;
                 let buildingType = element.name;
-                game.player.didCollide(buildingCore, buildingType);
+                game.player.didCollideBuildings(buildingX, buildingY, buildingSize, buildingType);
             })
 
             // Check of player being inside the screen

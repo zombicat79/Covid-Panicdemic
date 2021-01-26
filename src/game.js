@@ -4,9 +4,11 @@ class Game {
     constructor () {
         this.canvas = null;
         this.ctx = null;
-        this.enemies = [];
         this.player = null;
         this.buildings = [];
+        this.sanitizers = [];
+        this.sanitizerShots = [];
+        this.masks = [];
         this.gameIsOver = false;
         this.gameScreen = null;
         this.score = 0;
@@ -61,14 +63,30 @@ class Game {
 
     startLoop () {
         const loop = function () {
+
+            // Random creation of sanitizers (enemies)
+            if (Math.random () > 0.99) {
+                let sanitizer = new Enemy(this.canvas, 40, Math.random() * 1300, -100);
+                game.sanitizers.push(sanitizer);
+            }
+
+            //Random creation of sanitizer shots (enemies)
+            if (Math.random () > 0.965 && this.sanitizers.length > 0) {
+                const randomI = Math.floor(Math.random() * this.sanitizers.length)
+                const randomSelectedShooter = this.sanitizers[randomI];
+                let shot = new Enemy(this.canvas, 10, randomSelectedShooter.x + randomSelectedShooter.size / 2, randomSelectedShooter.y + randomSelectedShooter.size);
+                game.sanitizerShots.push(shot);
+            }
+
+            /*Random creation of mask blocks
+            if (Math.random () > 0.99) {
+                let mask1 = new Enemy(this.canvas, 40, Math.random() * 1300, 200);
+                game.masks.push(mask);
+            }*/
             
             // Random creation of building blocks
             let randomNumber = Math.random();
             let lastBuilding = game.buildings.length - 1;
-            let hospitalCores = [];
-            let schoolCores = [];
-            let mallCores = [];
-            let apartmentCores = [];
             if (randomNumber > 0.98 && randomNumber < 0.99) {
                 let newHospitalBuilding = new Building(this.canvas, "hospital", "green", 100, Math.random() * 1300, -50, 5000);
                 if (lastBuilding < 0 || newHospitalBuilding.outerY + newHospitalBuilding.size + 5 < game.buildings[lastBuilding].outerY) {
@@ -109,13 +127,32 @@ class Game {
                 element.updatePosition();
             })
 
+            // Cascading & horizontal movement of sanitizers
+            game.sanitizers.forEach(function(element) {
+                element.updatePosition();
+            })
+
+            //Cascading movement of sanitizer shots
+            game.sanitizerShots.forEach(function(element) {
+                element.updateBulletPosition();
+            })
+
             // Animation frame refreshment
             game.ctx.fillStyle = "white";
             game.ctx.fillRect(0, 0, game.containerWidth, game.containerHeight);
             game.buildings.forEach(function(element) {
                 element.draw();
             })
+            game.sanitizerShots.forEach(function(element) {
+                element.draw();
+            })
+            /*game.masks.forEach(function(element) {
+                element.drawMasks();
+            })*/
             game.player.draw();
+            game.sanitizers.forEach(function(element) {
+                element.draw();
+            })
 
             if (this.gameIsOver === false) {
                 window.requestAnimationFrame(loop);

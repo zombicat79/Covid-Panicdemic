@@ -12,12 +12,21 @@ class Game {
         this.gameIsOver = false;
         this.gameScreen = null;
         this.score = 0;
+        this.scoreCounter = null;
+        this.lifeUnitOne = null;
+        this.lifeUnitTwo = null;
+        this.lifeUnitThree = null;
     }
     start () {
         this.canvasContainer = document.querySelector('main');
         this.canvas = this.gameScreen.querySelector('canvas');
         this.ctx = this.canvas.getContext('2d');
-        // Save reference to the score and lives elements
+        
+        this.scoreCounter = document.querySelector('#score p');
+        this.lifeUnitOne = document.querySelector('#healthy');
+        this.lifeUnitTwo = document.querySelector('#wounded');
+        this.lifeUnitThree = document.querySelector('#critical');
+        
         this.containerWidth = this.canvasContainer.offsetWidth;
         this.containerHeight = this.canvasContainer.offsetHeight;
         this.canvas.setAttribute('width', this.containerWidth);
@@ -25,7 +34,7 @@ class Game {
 
         const middleScreen = this.containerWidth / 2;
         const bottomScreen = this.containerHeight - 180;
-        this.player = new Player(this.canvas, 3, 40, middleScreen, bottomScreen);
+        this.player = new Player(this.canvas, 100, 40, middleScreen, bottomScreen);
         this.player.draw();
         
         const boundHandleKeyInput = this.handleKeyInput.bind(this)
@@ -70,7 +79,7 @@ class Game {
             }
 
             //Random creation of sanitizer shots (enemies)
-            if (Math.random () > 0.965 && this.sanitizers.length > 0) {
+            if (Math.random () > 0.9 && this.sanitizers.length > 0) {
                 const randomI = Math.floor(Math.random() * this.sanitizers.length)
                 const randomSelectedShooter = this.sanitizers[randomI];
                 let shot = new Enemy(this.canvas, 10, randomSelectedShooter.x + randomSelectedShooter.size / 2, randomSelectedShooter.y + randomSelectedShooter.size);
@@ -128,21 +137,41 @@ class Game {
                 game.player.didCollideSanitizers(sanitizerX, sanitizerY, sanitizerSize);
             })
 
+            //Check for collisions with sanitizer shots
+            game.sanitizerShots.forEach(function(element) {
+                let shotX = element.x;
+                let shotY = element.y;
+                let shotSize = element.size;
+                if (game.player.didCollideShots(shotX, shotY, shotSize)) {
+                    element.y = game.containerHeight;
+                    game.player.isHit = false;
+                }
+            })
+
             // Check of player being inside the screen
             game.player.handleScreenCollision();
 
-            // Cascading movement of building blocks
+            // Cascading movement of building blocks (elimination of elements outside of screen)
+            game.buildings = game.buildings.filter(function(element) {
+                return element.outerY < game.containerHeight;
+            })
             game.buildings.forEach(function(element) {
                 element.updatePosition();
             })
 
-            // Cascading & horizontal movement of sanitizers
+            // Cascading & horizontal movement of sanitizers (elimination of elements outside of screen)
+            game.sanitizers = game.sanitizers.filter(function(element) {
+                return element.y < game.containerHeight;
+            })
             game.sanitizers.forEach(function(element) {
                 element.updatePosition();
             })
 
-            //Cascading movement of sanitizer shots
-            game.sanitizerShots.forEach(function(element) {
+            //Cascading movement of sanitizer shots (elimination of elements outside of screen)
+            game.sanitizerShots = game.sanitizerShots.filter(function(element) {
+                return element.y < game.containerHeight; 
+            })
+            game.sanitizerShots.forEach(function(element) {   
                 element.updateBulletPosition();
             })
 
@@ -166,17 +195,27 @@ class Game {
             if (this.gameIsOver === false) {
                 window.requestAnimationFrame(loop);
             }
+            else {
+                this.gameOver();
+            }
         }.bind(this);
         window.requestAnimationFrame(loop);
     };
 
-    checkCollisions () {
+    gameOver () {
+        if (this.gameIsOver === true) {
+            endGame();
+        }  
     };
 
-    gameOver () {   
-    };
+    updateGameStats () { 
+        this.scoreCounter.innerHTML = this.score;
+        if (this.player.lives < 700) {
+            this.lifeUnitThree
+        }
+        if (this.player.lives < 300) {
 
-    updateGameStats () {      
+        }
     };
 
 }

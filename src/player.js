@@ -12,6 +12,7 @@ class Player {
         this.speed = 30;
         this.image = document.createElement('img');
         this.image.src = 'img/virus.png';
+        this.isHit = false;
     }
 
     /* setDirection (direction) {
@@ -37,12 +38,7 @@ class Player {
         }
     }
 
-    removeLife () {
-    }
-
     draw () {
-        //this.ctx.fillStyle = "red";
-        //this.ctx.fillRect(this.x, this.y, this.size, this.size)
         this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
     }    
     
@@ -81,6 +77,7 @@ class Player {
                     game.score += 5;
             }
         }
+        game.updateGameStats();
     }
 
     didCollideSanitizers (sanitizerX, sanitizerY, sanitizerSize) {
@@ -102,7 +99,42 @@ class Player {
             hitLeft = true;
         }
         if (hitTop && hitBottom && hitLeft && hitRight) {
-            console.log('hit!')
+            this.lives -= 1;
+            if (this.lives <= 0) {
+                this.die();
+            }
         }
+    }
+
+    didCollideShots (shotX, shotY, shotSize) {
+        let shotHitTop = false;
+        let shotHitBottom = false;
+        let shotHitRight = false;
+        let shotHitLeft = false;
+
+        if (shotY + shotSize >= this.y) {
+            shotHitTop = true;
+        }
+        if (shotY <= this.y + this.size) {
+            shotHitBottom = true;
+        }
+        if (shotX + shotSize >= this.x) {
+            shotHitRight = true;
+        }
+        if (shotX <= this.x + this.size) {
+            shotHitLeft = true;
+        }
+        if (shotHitTop && shotHitBottom && shotHitLeft && shotHitRight) {
+            this.lives -= 1;
+            this.isHit = true;
+            if (this.lives <= 0) {
+                this.die();
+            }
+        }
+        return this.isHit;
+    }
+
+    die () {
+        game.gameIsOver = true;
     }
 }

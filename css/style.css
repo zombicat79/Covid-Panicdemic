@@ -122,15 +122,13 @@ header {
     width: 35%;
     height: 50px;
     
-}
+} */
 
 #score p {
-    position: relative;
-    right: 30px;
     font-family: 'Press Start 2P', cursive;
-    font-size: 30px;
+    font-size: 10px;
     color: white;
-} */
+}
 
 main {
     height: 100vh;

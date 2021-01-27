@@ -26,6 +26,7 @@ function createSplashScreen () {
 
     /*window.addEventListener('load', event => {
         const startMusic = document.querySelector("audio");
+        startMusic.currentTime = 0;
         startMusic.volume = 0.2;
         startMusic.play();
     })*/

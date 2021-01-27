@@ -120,6 +120,14 @@ class Game {
                 game.player.didCollideBuildings(buildingX, buildingY, buildingSize, buildingType);
             })
 
+            //Check for collisions with sanitizers
+            game.sanitizers.forEach(function(element) {
+                let sanitizerX = element.x;
+                let sanitizerY = element.y;
+                let sanitizerSize = element.size;
+                game.player.didCollideSanitizers(sanitizerX, sanitizerY, sanitizerSize);
+            })
+
             // Check of player being inside the screen
             game.player.handleScreenCollision();
 

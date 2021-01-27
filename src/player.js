@@ -10,6 +10,8 @@ class Player {
         this.y = y;
         this.direction = 0;
         this.speed = 30;
+        this.image = document.createElement('img');
+        this.image.src = 'img/virus.png';
     }
 
     /* setDirection (direction) {
@@ -39,14 +41,11 @@ class Player {
     }
 
     draw () {
-        this.ctx.fillStyle = "red";
-        this.ctx.fillRect(this.x, this.y, this.size, this.size);
-        /* const virusSprite = document.createElement('img');
-        virusSprite.src = '/img/virus.png'
-        virusSprite.addEventListener('load', function {
-            this.ctx.drawImage(virusSprite, this.x, this.y, this.size, this.size);
-        })*/
-    }
+        //this.ctx.fillStyle = "red";
+        //this.ctx.fillRect(this.x, this.y, this.size, this.size)
+        this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
+    }    
+    
 
     didCollideBuildings (buildingX, buildingY, buildingSize, buildingType) {  
         let crossedTop = false;
@@ -68,7 +67,6 @@ class Player {
             crossedLeft = true;
         }
         if (crossedTop && crossedBottom && crossedLeft && crossedRight) {
-            console.log("hit!");
             switch (buildingType) {
                 case "hospital":
                     game.score += 50;
@@ -82,6 +80,29 @@ class Player {
                 default:
                     game.score += 5;
             }
+        }
+    }
+
+    didCollideSanitizers (sanitizerX, sanitizerY, sanitizerSize) {
+        let hitTop = false;
+        let hitBottom = false;
+        let hitRight = false;
+        let hitLeft = false;
+
+        if (sanitizerY + sanitizerSize >= this.y) {
+            hitTop = true;
+        }
+        if (sanitizerY <= this.y + this.size) {
+            hitBottom = true;
+        }
+        if (sanitizerX + sanitizerSize >= this.x) {
+            hitRight = true;
+        }
+        if (sanitizerX <= this.x + this.size) {
+            hitLeft = true;
+        }
+        if (hitTop && hitBottom && hitLeft && hitRight) {
+            console.log('hit!')
         }
     }
 }

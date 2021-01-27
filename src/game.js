@@ -86,11 +86,16 @@ class Game {
                 game.sanitizerShots.push(shot);
             }
 
-            /*Random creation of mask blocks
-            if (Math.random () > 0.99) {
-                let mask1 = new Enemy(this.canvas, 40, Math.random() * 1300, 200);
-                game.masks.push(mask);
-            }*/
+            //Random creation of mask blocks (TRY TO FIX BLOCKS APPEARING ON TOP OF ONE ANOTHER)
+            let randomIntegerNumber = Math.floor(Math.random() * 10);
+            if (Math.random () > 0.995) {
+                let maskBlock = [new Enemy(this.canvas, 40, Math.random() * 1300, -100)];
+                maskBlock.push(new Enemy(this.canvas, 40, maskBlock[0].x + 41, -100));
+                for (let i = 1; i < randomIntegerNumber; i++) {
+                    maskBlock.push(new Enemy(this.canvas, 40, maskBlock[i].x + 41, -100));
+                }
+                game.masks.push(maskBlock);
+            }
             
             // Random creation of building blocks
             let randomNumber = Math.random();
@@ -148,6 +153,16 @@ class Game {
                 }
             })
 
+            //Check for collisions with masks
+            game.masks.forEach(function(element) {
+                element.forEach(function(element) {
+                    let maskX = element.x;
+                    let maskY = element.y;
+                    let maskSize = element.size;
+                    game.player.didCollideMasks(maskX, maskY, maskSize);
+                })
+            })
+
             // Check of player being inside the screen
             game.player.handleScreenCollision();
 
@@ -175,6 +190,13 @@ class Game {
                 element.updateBulletPosition();
             })
 
+            //Cascading movement of mask blocks (elimination of elements outside of screen)
+            game.masks.forEach(function(element) {
+                element.forEach(function(element) {
+                    element.updateMasksPosition();
+                })
+            })
+
             // Animation frame refreshment
             game.ctx.fillStyle = "white";
             game.ctx.fillRect(0, 0, game.containerWidth, game.containerHeight);
@@ -184,9 +206,11 @@ class Game {
             game.sanitizerShots.forEach(function(element) {
                 element.draw();
             })
-            /*game.masks.forEach(function(element) {
-                element.drawMasks();
-            })*/
+            game.masks.forEach(function(element) {
+                element.forEach(function(element) {
+                    element.drawMasks();
+                })
+            })
             game.player.draw();
             game.sanitizers.forEach(function(element) {
                 element.draw();
@@ -208,7 +232,7 @@ class Game {
         }  
     };
 
-    updateGameStats () { 
+    updateGameStats () { //PENDING
         this.scoreCounter.innerHTML = this.score;
         if (this.player.lives < 700) {
             this.lifeUnitThree

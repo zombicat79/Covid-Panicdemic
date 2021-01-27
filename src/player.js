@@ -13,6 +13,7 @@ class Player {
         this.image = document.createElement('img');
         this.image.src = 'img/virus.png';
         this.isHit = false;
+        this.smashedAgainstBottom = false;
     }
 
     /* setDirection (direction) {
@@ -132,6 +133,32 @@ class Player {
             }
         }
         return this.isHit;
+    }
+
+    didCollideMasks (maskX, maskY, maskSize) {
+        let maskHitTop = false;
+        let maskHitBottom = false;
+        let maskHitRight = false;
+        let maskHitLeft = false;
+
+        /* PENDING !!!
+        if (this.y <= maskY + maskSize + 5 && this.x >= maskX && this.x + this.size <= maskX + maskSize && this.direction === -1) {
+            this.y += maskY + maskSize + 1;
+        }
+        /*else if (this.y <= 0 && this.direction === -1) {
+            this.y = 1;            
+        }
+        else if (this.x >= game.containerWidth - this.size && this.direction === 1) {
+            this.x = game.containerWidth - this.size - 1;
+            
+        }
+        else if (this.y >= game.containerHeight - 120 && this.direction === 1) {
+            this.y = game.containerHeight - 141;    
+        }
+        else {
+            this.x = this.x;
+            this.y = this.y;
+        }*/
     }
 
     die () {

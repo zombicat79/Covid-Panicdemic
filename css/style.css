@@ -131,6 +131,8 @@ header {
 }
 
 main {
+    margin: 0;
+    padding: 0;
     height: 100vh;
     width: 100vw;
 }
@@ -141,19 +143,72 @@ canvas {
 
 
 /* END SCREEN */
-
 #end {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
     background-image: url("../img/cityscape.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
 }
 
-h1,
-h2,
+#highscore-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@keyframes hscore {
+    from {transform: rotate(20deg);}
+    to {transform: rotate(360deg);}
+}
+
+#highscore {
+    margin-top: 100px;
+    animation-name: hscore;
+    animation-duration: 5s;
+}
+
+#ranking-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 0px;
+}
+
 ol {
-    position: relative;
-    text-align: center;
-    color: white;
+    width: auto;
+    margin: auto;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+    color: black;
+    margin-bottom: 80px;
+}
+
+ul {
+    width: auto;
+    margin: auto;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+    list-style-type: none;
+    color: black;
+    margin-bottom: 80px;
+}
+
+#replay-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#replay-button {
+    background-color: lightgrey;
+    animation-name: press;
+    animation-duration: 3s;
+    width: 100%;
+    height: 100px;
 }

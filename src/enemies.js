@@ -16,10 +16,10 @@ class Enemy {
         this.ctx.fillRect(this.x, this.y, this.size, this.size);  
     }
 
-    /*drawMasks () {      
+    drawMasks () {      
         this.ctx.fillStyle = "purple";
         this.ctx.fillRect(this.x, this.y, this.size, this.size);  
-    }*/
+    }
 
     updatePosition () {
         this.y += 1;
@@ -33,6 +33,10 @@ class Enemy {
 
     updateBulletPosition () {
         this.y += 4;
+    }
+
+    updateMasksPosition () {
+        this.y += 3;
     }
 
     isInsideScreen () {

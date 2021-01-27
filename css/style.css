@@ -19,20 +19,38 @@ body {
 /* START SCREEN */
 
 #splash {
-    background-image: url("../img/cityscape.jpg");
+    background-image: url("../img/cityscape-day.gif");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
 }
 
+@keyframes title {
+    from {width: 20%;}
+    to {width: 80%;}
+}
+
 #title {
    position: relative;
-   top: 200px;
+   top: 100px;
    display: block;
+   width: 80%;
+   animation-name: title;
+   animation-duration: 10s;
    margin-left: auto;
    margin-right: auto;
 }
+
+@keyframes press {
+    0% {top: 1500px;}
+    50% {top: 230px; background-color: red; border: 3px solid rgb(220, 20, 60, 1)}
+    60% {background-color: lightgray; border: 3px solid rgb(220, 20, 60, 0.9)}
+    70% {background-color: red; border: 3px solid rgb(220, 20, 60, 0.8)}
+    80% {background-color: lightgray; border: 3px solid rgb(220, 20, 60, 0.6)}
+    90% {background-color: red; border: 3px solid rgb(220, 20, 60, 0.4)}
+    100% {background-color: lightgray; border: 3px solid rgb(220, 20, 60, 0.2);}
+}   
 
 .arcade-button {
     position: relative;
@@ -41,6 +59,8 @@ body {
     width: 300px;
     height: 100px;
     background-color: lightgrey;
+    animation-name: press;
+    animation-duration: 3s;
 }
 
 .arcade-button img {
@@ -49,7 +69,6 @@ body {
 
 
 /* GAME SCREEN */
-
 header {
     background-color: black;
     height: 100px;
@@ -119,7 +138,7 @@ main {
 }
 
 canvas {
-    
+   
 }
 
 

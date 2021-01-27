@@ -17,12 +17,22 @@ function buildDom (html) {
 function createSplashScreen () {
     splashScreen = buildDom(`
     <main id="splash">
-        <img id="title" src="./img/game_title.png" alt="300">
+        <img id="title" src="./img/game_title.png">
         <button class="arcade-button">
             <img src="./img/start.png">
         </button>
     </main>`);
     document.body.appendChild(splashScreen);
+
+    /*window.addEventListener('load', event => {
+        const startMusic = document.querySelector("audio");
+        startMusic.volume = 0.2;
+        startMusic.play();
+    })*/
+    
+    /*const sound = new Audio();
+    sound.src = 'sound/Start.mp3';
+    sound.play();*/
 
     const startButton = document.querySelector('.arcade-button');
     startButton.addEventListener('click', startGame);

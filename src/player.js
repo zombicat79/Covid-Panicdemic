@@ -41,6 +41,11 @@ class Player {
     draw () {
         this.ctx.fillStyle = "red";
         this.ctx.fillRect(this.x, this.y, this.size, this.size);
+        /* const virusSprite = document.createElement('img');
+        virusSprite.src = '/img/virus.png'
+        virusSprite.addEventListener('load', function {
+            this.ctx.drawImage(virusSprite, this.x, this.y, this.size, this.size);
+        })*/
     }
 
     didCollideBuildings (buildingX, buildingY, buildingSize, buildingType) {  
@@ -66,16 +71,16 @@ class Player {
             console.log("hit!");
             switch (buildingType) {
                 case "hospital":
-                    game.score += 5000;
+                    game.score += 50;
                     break;
                 case "school":
-                    game.score += 2000;
+                    game.score += 20;
                     break;
                 case "mall":
-                    game.score += 1000;
+                    game.score += 10;
                     break;
                 default:
-                    game.score += 500;
+                    game.score += 5;
             }
         }
     }

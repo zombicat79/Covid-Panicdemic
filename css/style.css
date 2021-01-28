@@ -16,6 +16,27 @@ body {
     overflow: hidden;
 }
 
+
+/* PRE SCREEN */
+#pre-screen {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#mask {
+    width: 30%;
+    height: 400px;
+    margin-top: 80px;
+}
+
+#warning {
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+
 /* START SCREEN */
 
 #splash {
@@ -70,29 +91,36 @@ body {
 
 /* GAME SCREEN */
 header {
-    background-color: black;
+    background-color: gray;
     height: 100px;
-    border: 5px ridge grey;
-}
-
-/* #life-container {
+    border: 5px ridge gold;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    background-color: magenta;
-    height: 80px;
-    width: 30%;
-    border: 2px solid black
+    justify-content: space-between;
 }
 
-#life-container img {
+#heart-img {
+    position: fixed;
+    top: 20px;
+    left: 20px;
     width: 5%;
 }
 
+#life-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: gray;
+    height: 80px;
+    width: 30%;
+    padding-top: 20px;
+}
+
 .life-bar {
-    border: 2px solid black;
     height: 40px;
     width: 70px;
+    border: 2px solid gray;
+    display: block;
 }
 
 #critical {
@@ -107,26 +135,26 @@ header {
     background-color: lightgreen;
 }
 
-#score {
-    position: fixed;
-    float: right;
-    left: 300px;
+#score-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 20px;
     width: 50%;
     height: 50px;
-    border: 2px solid;
 }
 
-#score img {
-    position: fixed;
-    right: 6000px;
+#score-container img {
     width: 35%;
     height: 50px;
     
-} */
+}
 
-#score p {
+#score-container p {
+    position: relative;
+    bottom: 20px;
     font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
+    font-size: 30px;
     color: white;
 }
 
@@ -135,10 +163,6 @@ main {
     padding: 0;
     height: 100vh;
     width: 100vw;
-}
-
-canvas {
-   
 }
 
 
@@ -184,17 +208,6 @@ ol {
     text-align: left;
     font-family: 'Press Start 2P', cursive;
     font-size: 30px;
-    color: black;
-    margin-bottom: 80px;
-}
-
-ul {
-    width: auto;
-    margin: auto;
-    text-align: left;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 30px;
-    list-style-type: none;
     color: black;
     margin-bottom: 80px;
 }

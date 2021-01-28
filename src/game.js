@@ -234,13 +234,16 @@ class Game {
     };
 
     updateGameStats () { //PENDING
+        this.scoreCounter = document.querySelector('#score-container p');
         this.scoreCounter.innerHTML = this.score;
-        if (this.player.lives < 700) {
-            this.lifeUnitThree
+        this.lifeUnitThree = document.querySelector('#healthy');
+        this.lifeUnitTwo = document.querySelector('#wounded')
+        if (this.player.lives < 70) {
+            this.lifeUnitThree.style.display = "none";
         }
-        if (this.player.lives < 300) {
-
+        if (this.player.lives < 30) {
+            this.lifeUnitTwo.style.display = "none";
         }
-    };
+    }
 
 }

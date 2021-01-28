@@ -1,10 +1,13 @@
 "use strict";
 
 let game;
+let preScreen;
 let splashScreen;
 let gameScreen;
 let gameOverScreen;
 
+
+// Images
 const sanitizerImage = document.createElement('img');
 sanitizerImage.src = 'img/sanitizer.png';
 const shotImage = document.createElement('img');
@@ -19,6 +22,12 @@ const apartmentImage = document.createElement('img');
 apartmentImage.src = 'img/House.png'
 
 
+// Sound
+const startMusic = document.querySelector('#start-music');
+const gameMusic = document.querySelector('#game-music');
+const endMusic = document.querySelector('#end-music');
+
+
 // HTML DYNAMIC DOM CONSTRUCTOR
 function buildDom (html) {
  let newElement = document.createElement("div");
@@ -26,9 +35,26 @@ function buildDom (html) {
  return newElement;
 }
 
+
 // SCREEN GENERATORS
-// Update inner HTML !!!
+function createPreScreen () {
+    preScreen = buildDom(`
+    <main>
+        <div id="pre-screen">
+            <img id="mask" src="/img/mask.jpg">
+        </div>
+        <h1 id="warning">Please wear your mask before playing this game<h1>
+    </main>`);
+    document.body.appendChild(preScreen);
+
+    const maskButton = document.querySelector('#mask');
+    maskButton.addEventListener('click', function () {
+        createSplashScreen();
+    })  
+}
+
 function createSplashScreen () {
+    removePreScreen();
     splashScreen = buildDom(`
     <main id="splash">
         <img id="title" src="./img/game_title.png">
@@ -38,45 +64,45 @@ function createSplashScreen () {
     </main>`);
     document.body.appendChild(splashScreen);
 
-    /*window.addEventListener('load', event => {
-        const startMusic = document.querySelector("audio");
-        startMusic.currentTime = 0;
-        startMusic.volume = 0.2;
-        startMusic.play();
-    })*/
-    
-    /*const sound = new Audio();
-    sound.src = 'sound/Start.mp3';
-    sound.play();*/
+        startMusic.currentTime = 1;
+        startMusic.volume = 0.5;
+        startMusic.play(); 
     
     const startButton = document.querySelector('.arcade-button');
-    startButton.addEventListener('click', startGame);
-       
+    startButton.addEventListener('click', startGame);       
 }
 
-// Update inner HMTL !!!
+
 function createGameScreen () {
+    startMusic.volume = 0;
+    startMusic.pause();
     gameScreen = buildDom (`
     <header>
+        <img id="heart-img" src="img/heart.png">
         <section id="life-container">
-            <img>>
             <div id="critical" class="life-bar"></div>
             <div id="wounded" class="life-bar"></div>
             <div id="healthy" class="life-bar"></div>
         </section>
-        <section id="score">
-            <img>
-            <p></p>
+        <section id="score-container">
+            <img src="img/score.png">
+            <p>0</p>
         </section>
     </header>
     <main>
         <canvas></canvas>
     </main>`);
     document.body.appendChild(gameScreen);
+
+    gameMusic.currentTime = 0;
+    gameMusic.volume = 0.5;
+    gameMusic.play();
 }
 
-// Update inner HTML !!!
+
 function createGameOverScreen () {
+    gameMusic.volume = 0;
+    gameMusic.pause();
     gameOverScreen = buildDom(`
     <main id="end">
         <div id="highscore-container">
@@ -110,14 +136,20 @@ function createGameOverScreen () {
     </main>`);
     document.body.appendChild(gameOverScreen);
 
+    endMusic.currentTime = 0;
+    endMusic.volume = 0.5;
+    endMusic.play();
+
     const replayButton = document.querySelector('#replay-button');
     replayButton.addEventListener('click', function () {
         replayGame();
     })
 }
 
+function removePreScreen () {
+    preScreen.remove();
+}
 
-// PENDING
 function removeSplashScreen () {
     splashScreen.remove();
 }
@@ -142,18 +174,21 @@ function startGame () {
 
 function endGame () {
     removeGameScreen();
-    insertHighScore();
+    //insertHighScore();
     createGameOverScreen();
 }
 
-function insertHighScore () {
+/*function insertHighScore () {     PENDING !!!
     const highScore = document.querySelectorAll('.points');
     console.log(highScore);
-}
+}*/
 
 function replayGame () {
+    endMusic.volume = 0;
+    endMusic.pause();
     removeGameOverScreen();
-        //Pending game stats removal !!!
+    game.score = 0;
+    game.player.lives = 100;
     createGameScreen();
 
     game = new Game();
@@ -162,4 +197,4 @@ function replayGame () {
     game.start();
 }
 
-window.addEventListener('load', createSplashScreen);
+window.addEventListener('load', createPreScreen);

@@ -69,7 +69,7 @@ function createSplashScreen () {
     document.body.appendChild(splashScreen);
 
         startMusic.currentTime = 1;
-        startMusic.volume = 0.5;
+        startMusic.volume = 0.2;
         startMusic.play(); 
     
     const startButton = document.querySelector('.arcade-button');
@@ -99,7 +99,7 @@ function createGameScreen () {
     document.body.appendChild(gameScreen);
 
     gameMusic.currentTime = 0;
-    gameMusic.volume = 0.5;
+    gameMusic.volume = 0.2;
     gameMusic.play();
 }
 
@@ -141,7 +141,7 @@ function createGameOverScreen () {
     document.body.appendChild(gameOverScreen);
 
     endMusic.currentTime = 0;
-    endMusic.volume = 0.5;
+    endMusic.volume = 0.2;
     endMusic.play();
 
     const replayButton = document.querySelector('#replay-button');

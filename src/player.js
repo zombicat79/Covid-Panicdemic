@@ -65,7 +65,7 @@ class Player {
         }
         if (crossedTop && crossedBottom && crossedLeft && crossedRight) {
             tokenSound.currentTime = 0;
-            tokenSound.volume = 0.5;
+            tokenSound.volume = 0.2;
             tokenSound.play();
             switch (buildingType) {
                 case "hospital":
@@ -104,7 +104,7 @@ class Player {
         }
         if (hitTop && hitBottom && hitLeft && hitRight) {
             hitSound.currentTime = 0;
-            hitSound.volume = 0.5;
+            hitSound.volume = 0.2;
             hitSound.play();
             this.lives -= 2;
             if (this.lives <= 0) {
@@ -133,7 +133,7 @@ class Player {
         }
         if (shotHitTop && shotHitBottom && shotHitLeft && shotHitRight) {
             hitSound.currentTime = 0;
-            hitSound.volume = 0.5;
+            hitSound.volume = 0.2;
             hitSound.play();
             this.lives -= 1;
             this.isHit = true;
@@ -172,7 +172,7 @@ class Player {
 
     die () {
         failSound.currentTime = 0;
-        failSound.volume = 0.5;
+        failSound.volume = 0.2;
         failSound.play();
         game.gameIsOver = true;
     }

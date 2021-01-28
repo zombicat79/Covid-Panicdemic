@@ -202,7 +202,8 @@ main {
     margin-bottom: 0px;
 }
 
-ol {
+ol,
+ul {
     width: auto;
     margin: auto;
     text-align: left;
@@ -210,6 +211,7 @@ ol {
     font-size: 30px;
     color: black;
     margin-bottom: 80px;
+    list-style-type: none;
 }
 
 #replay-container {

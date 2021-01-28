@@ -87,7 +87,7 @@ class Game {
                 let shot = new Enemy(this.canvas, 10, randomSelectedShooter.x + randomSelectedShooter.size / 2, randomSelectedShooter.y + randomSelectedShooter.size);
                 game.sanitizerShots.push(shot);
                 shotSound.currentTime = 0;
-                shotSound.volume = 0.5;
+                shotSound.volume = 0.2;
                 shotSound.play();
             }
 

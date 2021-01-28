@@ -26,6 +26,10 @@ apartmentImage.src = 'img/House.png'
 const startMusic = document.querySelector('#start-music');
 const gameMusic = document.querySelector('#game-music');
 const endMusic = document.querySelector('#end-music');
+const shotSound = document.querySelector('#shot');
+const hitSound = document.querySelector('#hit');
+const tokenSound = document.querySelector('#token');
+const failSound = document.querySelector('#gameover-voice');
 
 
 // HTML DYNAMIC DOM CONSTRUCTOR

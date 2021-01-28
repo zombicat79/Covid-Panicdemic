@@ -5,6 +5,20 @@ let splashScreen;
 let gameScreen;
 let gameOverScreen;
 
+const sanitizerImage = document.createElement('img');
+sanitizerImage.src = 'img/sanitizer.png';
+const shotImage = document.createElement('img');
+shotImage.src = 'img/waterdrop.png';
+const hospitalImage = document.createElement('img');
+hospitalImage.src = 'img/Hospital.png'
+const schoolImage = document.createElement('img');
+schoolImage.src = 'img/School.png'
+const mallImage = document.createElement('img');
+mallImage.src = 'img/Mall.png'
+const apartmentImage = document.createElement('img');
+apartmentImage.src = 'img/House.png'
+
+
 // HTML DYNAMIC DOM CONSTRUCTOR
 function buildDom (html) {
  let newElement = document.createElement("div");
@@ -34,7 +48,7 @@ function createSplashScreen () {
     /*const sound = new Audio();
     sound.src = 'sound/Start.mp3';
     sound.play();*/
-
+    
     const startButton = document.querySelector('.arcade-button');
     startButton.addEventListener('click', startGame);
        
@@ -79,13 +93,13 @@ function createGameOverScreen () {
                 <li>Influenza</li>
             </ol>
             <ul>
-                <li>100000</li>
-                <li>75000</li>
-                <li>60000</li>
-                <li>50000</li>
-                <li>40000</li>
-                <li>15000</li>
-                <li>10000</li>
+                <li class="points">100000</li>
+                <li class="points">75000</li>
+                <li class="points">60000</li>
+                <li class="points">50000</li>
+                <li class="points">40000</li>
+                <li class="points">15000</li>
+                <li class="points">10000</li>
             </ul>
         </div>
         <div id="replay-container">
@@ -128,7 +142,13 @@ function startGame () {
 
 function endGame () {
     removeGameScreen();
+    insertHighScore();
     createGameOverScreen();
+}
+
+function insertHighScore () {
+    const highScore = document.querySelectorAll('.points');
+    console.log(highScore);
 }
 
 function replayGame () {

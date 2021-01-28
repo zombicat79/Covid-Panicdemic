@@ -16,6 +16,8 @@ class Game {
         this.lifeUnitOne = null;
         this.lifeUnitTwo = null;
         this.lifeUnitThree = null;
+        this.backgroundImage = document.createElement('img');
+        this.backgroundImage.src = 'img/blueprintcity.png';
     }
     start () {
         this.canvasContainer = document.querySelector('main');
@@ -198,13 +200,12 @@ class Game {
             })
 
             // Animation frame refreshment
-            game.ctx.fillStyle = "white";
-            game.ctx.fillRect(0, 0, game.containerWidth, game.containerHeight);
+            game.ctx.drawImage(game.backgroundImage, 0, 0, game.containerWidth, game.containerHeight);
             game.buildings.forEach(function(element) {
                 element.draw();
             })
             game.sanitizerShots.forEach(function(element) {
-                element.draw();
+                element.drawShots();
             })
             game.masks.forEach(function(element) {
                 element.forEach(function(element) {

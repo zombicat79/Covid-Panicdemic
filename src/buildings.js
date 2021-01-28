@@ -17,18 +17,17 @@ class Building {
 
     draw () {
         if (this.name === "hospital") {
-            this.ctx.fillStyle = this.color;
+            this.ctx.drawImage(hospitalImage, this.outerX, this.outerY, this.size, this.size);
         }
         else if (this.name === "school") {
-            this.ctx.fillStyle = this.color;
+            this.ctx.drawImage(schoolImage, this.outerX, this.outerY, this.size, this.size);
         }
         else if (this.name === "mall") {
-            this.ctx.fillStyle = this.color;
+            this.ctx.drawImage(mallImage, this.outerX, this.outerY, this.size, this.size);
         }
         else {
-            this.ctx.fillStyle = this.color;
+            this.ctx.drawImage(apartmentImage, this.outerX, this.outerY, this.size, this.size);
         }        
-        this.ctx.fillRect(this.outerX, this.outerY, this.size, this.size);
     }
 
     updatePosition () {

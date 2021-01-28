@@ -12,8 +12,11 @@ class Enemy {
     }
 
     draw () {      
-        this.ctx.fillStyle = "black";
-        this.ctx.fillRect(this.x, this.y, this.size, this.size);  
+        this.ctx.drawImage(sanitizerImage, this.x, this.y, this.size, this.size);  
+    }
+
+    drawShots () {      
+        this.ctx.drawImage(shotImage,this.x, this.y, this.size, this.size);  
     }
 
     drawMasks () {      

@@ -45,7 +45,7 @@ function createPreScreen () {
     preScreen = buildDom(`
     <main>
         <div id="pre-screen">
-            <img id="mask" src="/img/covid-mask.jpg">
+            <img id="mask" src="./img/wearyourmask.jpeg">
         </div>
         <h1 id="warning">Please wear your mask before playing this game<h1>
     </main>`);

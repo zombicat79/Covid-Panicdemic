@@ -1,6 +1,11 @@
 /* MAIN SETTINGS */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+@font-face {
+    font-family: "Russo-Regular";
+    src: url("./fonts/RussoOne-Regular.ttf");
+}
+
 html {
     box-sizing: border-box;
 }
@@ -18,22 +23,32 @@ body {
 
 
 /* PRE SCREEN */
+#alert-screen {
+    display: none;
+}
+
 #pre-screen {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #mask {
-    width: 30%;
-    height: 400px;
-    margin-top: 80px;
+    width: 300px;
+    margin: 0 auto;
+}
+#mask:hover {
+    cursor: pointer;
 }
 
 #warning {
     margin-top: 50px;
     text-align: center;
     font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
 }
 
 
@@ -75,8 +90,9 @@ body {
 
 .arcade-button {
     position: relative;
-    top: 230px;
-    left: 570px;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 300px;
     height: 100px;
     background-color: lightgrey;
@@ -176,6 +192,11 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.end-screen {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 #highscore-container {
     display: flex;
@@ -222,8 +243,101 @@ ul {
 
 #replay-button {
     background-color: lightgrey;
+    border: none;
     animation-name: press;
     animation-duration: 3s;
     width: 100%;
     height: 100px;
+}
+#replay-button:hover {
+    cursor: pointer;
+    animation-name: replay-blink;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes replay-blink {
+    0% {background-color: lightgrey;}
+    25% {background-color: red;}
+    50% {background-color: lightgrey;}
+    75% {background-color: red;}
+    100% {background-color: lightgrey;}
+}
+
+
+/* ZOMBIECAT BRANDING PACK */
+.branding-pack {
+    width: fit-content;
+    text-align: center;
+}
+.branding-pack:link, 
+.branding-pack:visited, 
+.branding-pack:active, 
+.branding-pack:hover {
+    text-decoration: none;
+    color: black;
+}
+.branding-pack:hover {
+    cursor: pointer;
+}
+.branding-pack--intro {
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 150px;
+}
+.branding-pack--cover, 
+.branding-pack--end {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+
+.branding-heading {
+    font-family: "Russo-Regular";
+    font-size: 25px;
+    margin: 0;
+}
+.branding-pack:hover .branding-heading {
+    text-shadow: 3px 1px 20px black, -3px -1px 20px black;
+}
+.branding-pack--cover .branding-heading, 
+.branding-pack--end .branding-heading {
+    font-size: 16px;
+}
+
+.branding-img {
+    width: 50px;
+}
+.branding-pack--alert .branding-img {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media screen and (max-width: 1300px) {
+    main #pre-screen {
+        display: none;
+    }
+    
+    main #alert-screen {
+        display: block;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        width: fit-content;
+        transform: translate(-50%, -50%);
+    }
+
+    #alert-screen .alert-text {
+        font-size: 20px;
+        font-family: "Russo-Regular"; 
+        color: black;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    #alert-screen .alert-text:nth-child(2) {
+        margin-bottom: 40px;
+    }
 }

@@ -44,10 +44,25 @@ function buildDom (html) {
 function createPreScreen () {
     preScreen = buildDom(`
     <main>
-        <div id="pre-screen">
-            <img id="mask" src="./img/wearyourmask.jpeg">
+        <div id="alert-screen">
+            <p class="alert-text">This site is not available for mobile devices.</p>
+            <p class="alert-text">Please use a desktop computer to access its content.</p>
+
+            <a href="https://zombiecat.dev/" target="_blank" class="branding-pack branding-pack--alert">
+                <h1 class="branding-heading">Zombiecat</h1>
+                <img class="branding-img" src="./img/zombiecat-trans-logo.png">
+            </a>
         </div>
-        <h1 id="warning">Please wear your mask before playing this game<h1>
+
+        <div id="pre-screen">
+            <img id="mask" src="./img/wearyourmask.png">
+            <h2 id="warning">Please wear your mask before playing this game</h2>
+
+            <a href="https://zombiecat.dev/" target="_blank" class="branding-pack branding-pack--intro">
+                <h1 class="branding-heading">Zombiecat</h1>
+                <img class="branding-img" src="./img/zombiecat-trans-logo.png">
+            </a>
+        </div>
     </main>`);
     document.body.appendChild(preScreen);
 
@@ -61,6 +76,11 @@ function createSplashScreen () {
     removePreScreen();
     splashScreen = buildDom(`
     <main id="splash">
+        <a href="https://zombiecat.dev/" target="_blank" class="branding-pack branding-pack--cover">
+            <img class="branding-img" src="./img/zombiecat-trans-logo.png">
+            <h1 class="branding-heading">Zombiecat</h1>
+        </a>
+
         <img id="title" src="./img/game_title.png">
         <button class="arcade-button">
             <img src="./img/start.png">
@@ -109,33 +129,40 @@ function createGameOverScreen () {
     gameMusic.pause();
     gameOverScreen = buildDom(`
     <main id="end">
-        <div id="highscore-container">
-            <img id="highscore" src="img/highscore.png">        
-        </div>
-        <div id="ranking-container">
-            <ol>
-                <li>COVID-19</li>
-                <li>Ebola</li>
-                <li>Malaria</li>
-                <li>Dengue</li>
-                <li>HIV</li>
-                <li>Rabies</li>
-                <li>Influenza</li>
-            </ol>
-            <ul>
-                <li class="points">100000</li>
-                <li class="points">75000</li>
-                <li class="points">60000</li>
-                <li class="points">50000</li>
-                <li class="points">40000</li>
-                <li class="points">15000</li>
-                <li class="points">10000</li>
-            </ul>
-        </div>
-        <div id="replay-container">
-            <button id="replay-button">
-                <img src="img/replay.png">
-            </button>
+        <a href="https://zombiecat.dev/" target="_blank" class="branding-pack branding-pack--end">
+            <img class="branding-img" src="./img/zombiecat-trans-logo.png">
+            <h1 class="branding-heading">Zombiecat</h1>
+        </a>
+
+        <div class="end-screen">
+            <div id="highscore-container">
+                <img id="highscore" src="img/highscore.png">        
+            </div>
+            <div id="ranking-container">
+                <ol>
+                    <li>COVID-19</li>
+                    <li>Ebola</li>
+                    <li>Malaria</li>
+                    <li>Dengue</li>
+                    <li>HIV</li>
+                    <li>Rabies</li>
+                    <li>Influenza</li>
+                </ol>
+                <ul>
+                    <li class="points">100000</li>
+                    <li class="points">75000</li>
+                    <li class="points">60000</li>
+                    <li class="points">50000</li>
+                    <li class="points">40000</li>
+                    <li class="points">15000</li>
+                    <li class="points">10000</li>
+                </ul>
+            </div>
+            <div id="replay-container">
+                <button id="replay-button">
+                    <img src="img/replay.png">
+                </button>
+            </div>
         </div>
     </main>`);
     document.body.appendChild(gameOverScreen);

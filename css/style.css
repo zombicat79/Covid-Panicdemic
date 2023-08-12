@@ -6,6 +6,16 @@
     src: url("./fonts/RussoOne-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Source-Bold";
+    src: url("./fonts/SourceCodePro-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Source-Medium";
+    src: url("./fonts/SourceCodePro-Medium.ttf");
+}
+
 html {
     box-sizing: border-box;
 }
@@ -67,6 +77,23 @@ body {
     to {width: 80%;}
 }
 
+#game-instructions {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: "Source-Bold";
+    font-size: 20px;
+    color: red;
+    animation-name: infection-blip;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+#game-instructions:hover {
+    cursor: pointer;
+}
+
 #title {
    position: relative;
    top: 100px;
@@ -99,11 +126,95 @@ body {
     animation-name: press;
     animation-duration: 3s;
 }
+.arcade-button:hover {
+    border: 5px solid red;
+    cursor: pointer;
+}
 
 .arcade-button img {
     width: 250px;
 }
 
+
+/* INSTRUCTIONS POPUP */
+#instructions {
+    background-color: white;
+    height: 600px;
+    width: 800px;
+    border-radius: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#instructions .popup-closer {
+    height: 10%;
+    position: relative;
+}
+#instructions .popup-closer #infect-prompt {
+    font-family: "Source-Bold";
+    font-size: 20px;
+    color: red;
+    text-transform: uppercase;
+    animation-name: infection-blip;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 2s;
+}
+@keyframes infection-blip {
+    0% {opacity: 1}
+    50% {opacity: 0}
+    100% {opacity: 1}
+}
+#instructions .popup-closer p+p {
+    font-family: "Russo-Regular";
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+}
+#instructions .popup-closer p:hover {
+    cursor: pointer;
+    transform: scale(1.5)
+}
+
+#instructions .popup-content {
+    height: 90%;
+    padding: 0 50px 30px;
+    font-family: "Source-Medium";
+    font-size: 14px;
+    text-align: center;
+}
+.popup-content .bold-text {
+    font-family: "Source-Bold";
+}
+.popup-content .content-block:not(.content-block:last-child) {
+    margin-bottom: 20px;
+}
+
+.popup-content #keyboard-img {
+    width: 200px;
+}
+
+.popup-content #building-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#building-wrapper .building-img {
+    width: 65px;
+}
+
+.popup-content #sanitizer-img {
+    width: 50px;
+}
 
 /* GAME SCREEN */
 header {
@@ -119,7 +230,7 @@ header {
     position: fixed;
     top: 20px;
     left: 20px;
-    width: 5%;
+    width: 65px;
 }
 
 #life-container {
@@ -179,6 +290,12 @@ main {
     padding: 0;
     height: 100vh;
     width: 100vw;
+}
+
+canvas {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
@@ -292,6 +409,9 @@ ul {
     position: absolute;
     top: 25px;
     right: 25px;
+}
+.branding-pack--end {
+    z-index: 999;
 }
 
 .branding-heading {

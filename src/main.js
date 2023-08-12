@@ -3,6 +3,7 @@
 let game;
 let preScreen;
 let splashScreen;
+let instructionsPopup;
 let gameScreen;
 let gameOverScreen;
 
@@ -81,6 +82,7 @@ function createSplashScreen () {
             <h1 class="branding-heading">Zombiecat</h1>
         </a>
 
+        <p id="game-instructions" onclick="showInstructions();">Check game instructions</p>
         <img id="title" src="./img/game_title.png">
         <button class="arcade-button">
             <img src="./img/start.png">
@@ -96,6 +98,50 @@ function createSplashScreen () {
     startButton.addEventListener('click', startGame);       
 }
 
+function createInstructionsPopup () {
+    document.getElementById("splash").style.filter = "brightness(0.4)";
+    instructionsPopup = buildDom(`
+    <aside id="instructions">
+        <div class="popup-closer">
+            <p id="infect-prompt" style="display: none">Go Infect!</p>
+            <p onclick="removeInstructions();">X</p>
+        </div>
+        
+        <div class="popup-content">
+            <div class="content-block">
+                <p>Take the role of the <span class="bold-text">COVID-19</span> virus, as the pandemic sweeps through a random city inhabited by millions of inadvertent negligent humans.</p>
+                <img id="virus-img" src="./img/virus.png">
+            </div>
+            <div class="content-block">
+                <p>Use the following sets of keyboard buttons to move around and infect as many buildings as possible:</p>
+                <img id="keyboard-img" src="./img/keyboard.png">
+            </div>
+            <div class="content-block">
+                <p><span class="bold-text">Hospitals</span> will get you the most points!</p>
+                <div id="building-wrapper">
+                    <img class="building-img" src="./img/School.png">
+                    <img class="building-img" src="./img/House.png">
+                    <img class="building-img" src="./img/Hospital.png">
+                    <img class="building-img" src="./img/Mall.png">
+                </div>
+            </div>
+            <div class="content-block">
+                <p>Avoid all contact with <span class="bold-text">sanitizers</span> and their relentless shooting!</p>
+                <img id="sanitizer-img" src="./img/sanitizer.png">
+            </div>
+        </div>
+    </aside>`);
+    document.body.appendChild(instructionsPopup);
+
+    const infectPrompt = document.getElementById("infect-prompt");
+    const xCloser = document.querySelector(".popup-closer p+p");
+    xCloser.addEventListener("mouseover", function() {
+        infectPrompt.style.display = "block";
+    })
+    xCloser.addEventListener("mouseout", function() {
+        infectPrompt.style.display = "none";
+    })
+}
 
 function createGameScreen () {
     startMusic.volume = 0;
@@ -185,12 +231,21 @@ function removeSplashScreen () {
     splashScreen.remove();
 }
 
+function removeInstructions () {
+    instructionsPopup.remove();
+    document.getElementById("splash").style.filter = "brightness(1)";
+}
+
 function removeGameScreen () {
     gameScreen.remove();
 }
 
 function removeGameOverScreen () {
     gameOverScreen.remove();
+}
+
+function showInstructions () {
+    createInstructionsPopup();
 }
 
 function startGame () {
